@@ -11,6 +11,14 @@ const config = {
         color: 'dodgerblue',
         initialSpeedY: 1.5,
     },
+
+    blocks: {
+        blockColors: ['red', 'yellow', 'dodgerblue'],
+        width: 60,
+        height: 20,
+        gap: 5,
+        y: 140,
+    },
 }
 
 export default config
