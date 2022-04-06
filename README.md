@@ -1,2 +1,2 @@
 # js-breakout
-Breakout-like game made using JavaScript canvas + TypeScript
+Breakout-like game created using JavaScript canvas + TypeScript
