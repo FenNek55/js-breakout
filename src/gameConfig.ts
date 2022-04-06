@@ -1,9 +1,13 @@
 const config = {
+    canvas: {
+        background: 'black',
+    },
+
     platform: {
         width: 100,
         height: 10,
         color: 'dodgerblue',
-        y: 150,
+        y: 100,
     },
 
     ball: {

@@ -2,12 +2,12 @@ import config from './gameConfig'
 import { Rectangle, Mouse, Ball, Block } from './types'
 import handlePhysics from './physics'
 
-const setupCanvas = () => {
+const setupCanvas = (width: number, height: number) => {
     const canvas: HTMLCanvasElement = document.getElementById(
         'main-canvas'
     ) as HTMLCanvasElement
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
+    canvas.width = width
+    canvas.height = height
 
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
 
@@ -17,10 +17,10 @@ const setupCanvas = () => {
     }
 }
 
-const { ctx, canvas } = setupCanvas()
+const { ctx, canvas } = setupCanvas(1280, 720)
 
 export const setupGame = () => {
-    const mouse = new Mouse()
+    const mouse = new Mouse(canvas)
 
     const balls: Ball[] = [
         new Ball(
@@ -76,6 +76,8 @@ export const setupGame = () => {
 
     const runAnimation = (): void => {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
+        ctx.fillStyle = config.canvas.background
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
 
         platform.update(mouse.x - config.platform.width / 2)
 

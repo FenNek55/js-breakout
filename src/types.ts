@@ -104,12 +104,14 @@ export class Ball {
 export class Mouse {
     x: number
     y: number
+    canvas: HTMLCanvasElement
 
-    constructor() {
+    constructor(canvas: HTMLCanvasElement) {
+        this.canvas = canvas
         this.x = 0
         this.y = 0
 
-        window.addEventListener('mousemove', (e) => {
+        canvas.addEventListener('mousemove', (e) => {
             this.x = e.x
             this.y = e.y
         })

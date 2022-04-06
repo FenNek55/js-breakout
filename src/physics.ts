@@ -1,6 +1,6 @@
 import type { Rectangle, Ball } from './types'
 
-const handlePhysics = (platform: Rectangle, balls: Ball[]) => {
+const handlePlatformCollisions = (platform: Rectangle, balls: Ball[]) => {
     for (let i = 0; i < balls.length; i++) {
         const ball = balls[i]
 
@@ -15,6 +15,10 @@ const handlePhysics = (platform: Rectangle, balls: Ball[]) => {
             }
         }
     }
+}
+
+const handlePhysics = (platform: Rectangle, balls: Ball[]) => {
+    handlePlatformCollisions(platform, balls)
 }
 
 export default handlePhysics
