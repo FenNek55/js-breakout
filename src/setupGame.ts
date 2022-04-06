@@ -1,5 +1,5 @@
 import config from './gameConfig'
-import { Rectangle, Mouse, Ball } from './types'
+import { Rectangle, Mouse, Ball, Block } from './types'
 import handlePhysics from './physics'
 
 const setupCanvas = () => {
@@ -34,6 +34,8 @@ export const setupGame = () => {
         ),
     ]
 
+    const blocks: Block[] = []
+
     const platform = new Rectangle(
         ctx,
         canvas.width / 2 - config.platform.width,
@@ -43,7 +45,34 @@ export const setupGame = () => {
         config.platform.color
     )
 
-    const generateBlocks = (row: number, col: number): void => {}
+    const generateBlocks = (rows: number, columns: number): Block[] => {
+        const totalWidth =
+            rows * config.blocks.width + (rows - 1) * config.blocks.gap
+        const x = canvas.width / 2 - totalWidth / 2
+
+        for (let row = 0; row < rows; row++) {
+            for (let col = 0; col < columns; col++) {
+                blocks.push(
+                    new Block(
+                        ctx,
+                        x + row * config.blocks.width + row * config.blocks.gap,
+                        config.blocks.y +
+                            col * config.blocks.height +
+                            col * config.blocks.gap,
+                        config.blocks.width,
+                        config.blocks.height,
+                        3
+                    )
+                )
+            }
+        }
+
+        return blocks
+    }
+
+    const initGame = () => {
+        console.log(generateBlocks(10, 5))
+    }
 
     const runAnimation = (): void => {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -56,10 +85,15 @@ export const setupGame = () => {
             balls[i].update()
         }
 
+        for (let i = 0; i < blocks.length; i++) {
+            blocks[i].update()
+        }
+
         requestAnimationFrame(runAnimation)
     }
 
     return {
+        initGame,
         runAnimation,
         mouse,
         balls,

@@ -1,3 +1,5 @@
+import config from './gameConfig'
+
 export class Rectangle {
     ctx: CanvasRenderingContext2D
     x: number
@@ -32,6 +34,28 @@ export class Rectangle {
     update(x: number = this.x, y: number = this.y) {
         this.x = x
         this.y = y
+        this.draw()
+    }
+}
+
+export class Block extends Rectangle {
+    life: number
+
+    constructor(
+        ctx: CanvasRenderingContext2D,
+        x: number,
+        y: number,
+        width: number,
+        height: number,
+        life: number
+    ) {
+        super(ctx, x, y, width, height, config.blocks.blockColors[life - 1])
+        this.life = life
+    }
+
+    update() {
+        this.color = config.blocks.blockColors[this.life - 1]
+
         this.draw()
     }
 }
