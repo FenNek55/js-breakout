@@ -27,7 +27,7 @@ export const setupGame = () => {
             ctx,
             canvas.width / 2,
             canvas.height / 2,
-            0,
+            config.ball.initialSpeedX,
             config.ball.initialSpeedY,
             config.ball.radius,
             config.ball.color
@@ -71,7 +71,7 @@ export const setupGame = () => {
     }
 
     const initGame = () => {
-        console.log(generateBlocks(10, 5))
+        console.log(generateBlocks(8, 5))
     }
 
     const runAnimation = (): void => {
@@ -79,9 +79,9 @@ export const setupGame = () => {
         ctx.fillStyle = config.canvas.background
         ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-        platform.update(mouse.x - config.platform.width / 2)
+        handlePhysics(platform, blocks, balls)
 
-        handlePhysics(platform, balls)
+        platform.update(mouse.x - config.platform.width / 2)
 
         for (let i = 0; i < balls.length; i++) {
             balls[i].update()
