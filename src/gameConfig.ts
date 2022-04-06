@@ -11,9 +11,10 @@ const config = {
     },
 
     ball: {
-        radius: 8,
-        color: 'dodgerblue',
-        initialSpeedY: 1.5,
+        radius: 6,
+        color: 'white',
+        initialSpeedY: 5,
+        initialSpeedX: 0,
     },
 
     blocks: {
@@ -21,7 +22,7 @@ const config = {
         width: 60,
         height: 20,
         gap: 5,
-        y: 140,
+        y: 100,
     },
 }
 
