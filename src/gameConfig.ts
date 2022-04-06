@@ -13,14 +13,14 @@ const config = {
     ball: {
         radius: 6,
         color: 'white',
-        initialSpeedY: 5,
+        initialSpeedY: -2,
         initialSpeedX: 0,
     },
 
     blocks: {
         blockColors: ['red', 'yellow', 'dodgerblue'],
-        width: 60,
-        height: 20,
+        width: 80,
+        height: 26,
         gap: 5,
         y: 100,
     },

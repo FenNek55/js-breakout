@@ -112,7 +112,8 @@ export class Mouse {
         this.y = 0
 
         canvas.addEventListener('mousemove', (e) => {
-            this.x = e.x
+            let canvasRect = this.canvas.getBoundingClientRect()
+            this.x = e.x - canvasRect.left
             this.y = e.y
         })
     }

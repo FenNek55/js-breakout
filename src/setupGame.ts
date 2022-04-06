@@ -17,7 +17,7 @@ const setupCanvas = (width: number, height: number) => {
     }
 }
 
-const { ctx, canvas } = setupCanvas(1280, 720)
+export const { ctx, canvas } = setupCanvas(1280, 720)
 
 export const setupGame = () => {
     const mouse = new Mouse(canvas)
@@ -74,7 +74,7 @@ export const setupGame = () => {
         console.log(generateBlocks(8, 5))
     }
 
-    const runAnimation = (): void => {
+    const runAnimation = async (): Promise<void> => {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         ctx.fillStyle = config.canvas.background
         ctx.fillRect(0, 0, canvas.width, canvas.height)

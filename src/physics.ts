@@ -1,8 +1,24 @@
-import type { Rectangle, Ball, Block } from './types'
+import { Rectangle, Ball, Block } from './types'
+import { canvas } from './setupGame'
 
-const handlePlatformCollisions = (platform: Rectangle, balls: Ball[]) => {
+const handleBallsCollisions = (platform: Rectangle, balls: Ball[]) => {
     for (let i = 0; i < balls.length; i++) {
         const ball = balls[i]
+
+        if (ball.x - ball.radius <= 0) {
+            ball.vX *= -1
+            ball.x = ball.radius
+        }
+
+        if (ball.x + ball.radius >= canvas.width) {
+            ball.vX *= -1
+            ball.x = canvas.width - ball.radius
+        }
+
+        if (ball.y - ball.radius <= 0) {
+            ball.vY *= -1
+            ball.y = ball.radius
+        }
 
         if (ball.x >= platform.x && ball.x <= platform.x + platform.width) {
             if (
@@ -32,8 +48,8 @@ const handleBlocksCollisions = (blocks: Block[], balls: Ball[]) => {
                 block.x <= ball.x &&
                 block.x + block.width >= ball.x
             ) {
-                ball.y = block.y + block.height + ball.radius
                 ball.vY = Math.abs(ball.vY)
+                ball.y = block.y + block.height + ball.radius + ball.vY
                 block.life--
             }
             //top collision
@@ -43,8 +59,8 @@ const handleBlocksCollisions = (blocks: Block[], balls: Ball[]) => {
                 block.x <= ball.x &&
                 block.x + block.width >= ball.x
             ) {
-                ball.y = block.y - ball.radius
                 ball.vY = -Math.abs(ball.vY)
+                ball.y = block.y - ball.radius - ball.vY
                 block.life--
             }
             //left collision
@@ -54,8 +70,8 @@ const handleBlocksCollisions = (blocks: Block[], balls: Ball[]) => {
                 block.y <= ball.y &&
                 block.y + block.height >= ball.y
             ) {
-                ball.x = block.x - ball.radius
                 ball.vX = -Math.abs(ball.vX)
+                ball.x = block.x - ball.radius - ball.vX
                 block.life--
             }
             //right collision
@@ -65,8 +81,8 @@ const handleBlocksCollisions = (blocks: Block[], balls: Ball[]) => {
                 block.y <= ball.y &&
                 block.y + block.height >= ball.y
             ) {
-                ball.x = block.x + block.width + ball.radius
                 ball.vX = Math.abs(ball.vX)
+                ball.x = block.x + block.width + ball.radius + ball.vX
                 block.life--
             }
 
@@ -76,7 +92,7 @@ const handleBlocksCollisions = (blocks: Block[], balls: Ball[]) => {
 }
 
 const handlePhysics = (platform: Rectangle, blocks: Block[], balls: Ball[]) => {
-    handlePlatformCollisions(platform, balls)
+    handleBallsCollisions(platform, balls)
     handleBlocksCollisions(blocks, balls)
 }
 
